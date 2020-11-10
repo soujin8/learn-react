@@ -16,6 +16,7 @@ const App: React.FC<AppProps> = (props) => {
           setOpen(true);
           setTest(test);
         }}
+        testing="testing"
       />
       <Dialog
         open={open}
@@ -31,10 +32,11 @@ const App: React.FC<AppProps> = (props) => {
 
 type ChilProps = {
   onClickButton?: (test: string) => void | Promise<void>;
+  testing: string;
 };
 
 const Chil: React.FC<ChilProps> = (props) => {
-  const { onClickButton = () => {} } = props;
+  const { onClickButton = () => {}, testing } = props;
 
   return (
     <>
@@ -45,7 +47,7 @@ const Chil: React.FC<ChilProps> = (props) => {
           onClickButton("Updated Hoge");
         }}
       >
-        開く
+        開く{testing}
       </Button>
     </>
   );
