@@ -1,62 +1,78 @@
 import React from "react";
-import { Dialog, DialogTitle, Typography, Button } from "@material-ui/core";
+import LoadingPlaceHolder from "./LoadingPlaceholder";
+import {
+  Table,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  Paper,
+  Button,
+} from "@material-ui/core";
 
-type AppProps = {
-  hoge: String;
-};
-
+type AppProps = {};
+function createData(
+  name: string,
+  calories: number,
+  fat: number,
+  carbs: number,
+  protein: number
+) {
+  return { name, calories, fat, carbs, protein };
+}
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
 const App: React.FC<AppProps> = (props) => {
-  const [open, setOpen] = React.useState(false);
-  const [test, setTest] = React.useState("hoge");
+  const [load, setLoad] = React.useState(true);
 
   return (
     <>
-      <Chil
-        onClickButton={(test: string): void => {
-          setOpen(true);
-          setTest(test);
-        }}
-        testing="testing"
-      />
-      <Dialog
-        open={open}
-        onClose={(): void => {
-          setOpen(false);
-        }}
-      >
-        <DialogTitle>{test}</DialogTitle>
-      </Dialog>
-    </>
-  );
-};
-
-type ChilProps = {
-  onClickButton?: (test: string) => void | Promise<void>;
-  testing: string;
-};
-
-const Chil: React.FC<ChilProps> = (props) => {
-  const { onClickButton = () => {}, testing } = props;
-
-  return (
-    <>
-      <h1>Hello, World!</h1>
       <Button
         color="primary"
         onClick={(): void => {
-          onClickButton("Updated Hoge");
+          setLoad(!load);
         }}
       >
-        開く{testing}
+        CHANGE
       </Button>
+      {load ? (
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Dessert (100g serving)</TableCell>
+                <TableCell align="right">Calories</TableCell>
+                <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <LoadingPlaceHolder />
+      )}
     </>
   );
 };
-
-// class App extends React.Component<AppProps, {}> {
-//   render() {
-//     return <h1>Hello, {this.props.hoge}</h1>;
-//   }
-// }
 
 export default App;
