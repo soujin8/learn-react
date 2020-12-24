@@ -1,5 +1,5 @@
 import React from "react";
-import { UserContext, HobbyContext } from "../../App";
+import { UserContext, HobbyContext } from "./ContextApp";
 
 const ContextC = () => {
   const user = React.useContext(UserContext);

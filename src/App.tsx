@@ -1,28 +1,10 @@
 import React, { createContext } from "react";
-import ContextA from "./components/ContextSample/ContextA";
+import ContextApp from "./components/ContextSample/ContextApp";
 
-// createContext
-export const UserContext = createContext({ name: "hachi", age: "22" });
-export const HobbyContext = createContext("スノーボード");
-
-type Props = {};
-
-const App: React.FC<Props> = (props: Props) => {
-  // eslint-disable-next-line
-  const [user, setUser] = React.useState({
-    name: "セイラ",
-    age: "24",
-  });
-  // eslint-disable-next-line
-  const [hobby, setHobby] = React.useState("キャンプ");
-
+const App: React.FC = () => {
   return (
     <>
-      <UserContext.Provider value={user}>
-        <HobbyContext.Provider value={hobby}>
-          <ContextA />
-        </HobbyContext.Provider>
-      </UserContext.Provider>
+      <ContextApp />
     </>
   );
 };
