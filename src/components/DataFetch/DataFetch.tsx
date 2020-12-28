@@ -6,12 +6,15 @@ const DataFetch: React.FC = () => {
   const [query, setQuery] = useState("redux");
   const [url, setUrl] = useState(
     `http://hn.algolia.com/api/v1/search?query=redux`
-  );
+  )
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const result = await axios(url);
       setData(result.data);
+      setIsLoading(false)
     };
 
     fetchData();
@@ -32,6 +35,9 @@ const DataFetch: React.FC = () => {
       >
         Search
       </button>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
       <ul>
         {data.hits.map((item: any) => (
           <li key={item.objectID}>
@@ -39,6 +45,7 @@ const DataFetch: React.FC = () => {
           </li>
         ))}
       </ul>
+      )}
     </>
   );
 };
