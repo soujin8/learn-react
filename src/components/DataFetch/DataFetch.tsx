@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
+// reducer関数。
+// 現在のstateとactionに設定したtypeとpayloadから新しいstateを生成する。
 const dataFetchReducer = (state: any, action: any) => {
   switch (action.type) {
     case 'FETCH_INIT':
@@ -31,6 +33,9 @@ const useDataApi = (initialUrl: any, initialData: any) => {
   const [url, setUrl] = useState(
     initialUrl
   )
+  // Reducerフック。
+  // reducer関数とstateの初期値を渡す。
+  // 1つのstateオブジェクトでisLoading, isError, dataと複数のデータを管理できる。
   const [state, dispatch] = useReducer(dataFetchReducer, {
     isLoading: false,
     isError: false,
@@ -39,6 +44,7 @@ const useDataApi = (initialUrl: any, initialData: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // dispatch関数によってreducer関数のactionパラメータに情報を送ることができる。
       dispatch({type: 'FETCH_INIT'})
 
       try {
@@ -57,6 +63,7 @@ const useDataApi = (initialUrl: any, initialData: any) => {
 
 const DataFetch: React.FC = () => {
   const [query, setQuery] = useState("redux");
+  // stateオブジェクトから各プロパティにアクセスできる。
   const [state, setUrl] = useDataApi(
    'http://hn.algolia.com/api/v1/search?query=redux',
    { hits: [] }
