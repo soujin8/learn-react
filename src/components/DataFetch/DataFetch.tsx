@@ -28,13 +28,9 @@ const dataFetchReducer = (state: any, action: any) => {
 }
 
 const useDataApi = (initialUrl: any, initialData: any) => {
-  // const [data, setData] = useState(initialData);
   const [url, setUrl] = useState(
     initialUrl
   )
-  const [isLoading, setIsLoading] = useState(false);
-  // const [isError, setIsError] = useState(false)
-  // const doFetch = (url: string) => setUrl(url)
   const [state, dispatch] = useReducer(dataFetchReducer, {
     isLoading: false,
     isError: false,
@@ -48,27 +44,19 @@ const useDataApi = (initialUrl: any, initialData: any) => {
       try {
         const result = await axios(url);
         dispatch({type: 'FETCH_SUCCESS', payload: result.data})
-  //      setData(result.data);
       } catch(error) {
         dispatch({type: 'FETCH_FAILURE'})
       }
-
-      setIsLoading(false)
     };
 
     fetchData();
   }, [url]);
 
-  //return { data, isLoading, isError, doFetch}
   return [state, setUrl]
 }
 
 const DataFetch: React.FC = () => {
   const [query, setQuery] = useState("redux");
-//  const { data, isLoading, isError, doFetch} = useDataApi(
-//   'http://hn.algolia.com/api/v1/search?query=redux',
-//   { hits: [] }
-//  );
   const [state, setUrl] = useDataApi(
    'http://hn.algolia.com/api/v1/search?query=redux',
    { hits: [] }
@@ -78,7 +66,6 @@ const DataFetch: React.FC = () => {
     <>
       <form
         onSubmit={event => {
-          //doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`)
           setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)
           event.preventDefault()
         }}
