@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const DataFetch: React.FC = () => {
-  const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState("redux");
+const useDataApi = (initialUrl: any, initialData: any) => {
+  const [data, setData] = useState(initialData);
   const [url, setUrl] = useState(
-    `http://hn.algolia.com/api/v1/search?query=redux`
+    initialUrl
   )
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false)
+  const doFetch = (url: string) => setUrl(url)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,22 +16,33 @@ const DataFetch: React.FC = () => {
       setIsLoading(true)
 
       try {
-      const result = await axios(url);
-      setData(result.data);
+        const result = await axios(url);
+        setData(result.data);
       } catch(error) {
         setIsError(true)
       }
+
       setIsLoading(false)
     };
 
     fetchData();
   }, [url]);
 
+  return { data, isLoading, isError, doFetch}
+}
+
+const DataFetch: React.FC = () => {
+  const [query, setQuery] = useState("redux");
+  const { data, isLoading, isError, doFetch} = useDataApi(
+   'http://hn.algolia.com/api/v1/search?query=redux',
+   { hits: [] }
+  );
+
   return (
     <>
       <form
         onSubmit={event => {
-          setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)
+          doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`)
           event.preventDefault()
         }}
       >
