@@ -5,6 +5,7 @@ import React from "react";
 // import Callback from "./components/CallbackSample/Callback";
 // import Ref from "./components/RefSample/Ref";
 // import DataFetch from "./components/DataFetch/DataFetch";
+import Chart from "./components/Chart/Chart";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
       {/* <Callback /> */}
       {/* <Ref /> */}
       {/*<DataFetch /> */}
+      <Chart />
     </>
   );
 };
