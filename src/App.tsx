@@ -6,6 +6,7 @@ import React from "react";
 // import Ref from "./components/RefSample/Ref";
 // import DataFetch from "./components/DataFetch/DataFetch";
 import Chart from "./components/Chart/Chart";
+// import Parent from "./components/LoopSample/Parent";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
       {/* <Ref /> */}
       {/*<DataFetch /> */}
       <Chart />
+      {/* <Parent /> */}
     </>
   );
 };
