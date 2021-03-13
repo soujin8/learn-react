@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Card, CardContent, Button } from "@material-ui/core";
-import Grandson from "./Grandson";
 
 type Props = {
   count: number;
@@ -9,21 +8,17 @@ type Props = {
 
 const Children: React.FC<Props> = (props: Props) => {
   const { count, setCount } = props;
-  const onCount = (value: number) => {
-    setCount(value);
-  };
   return (
     <>
       <Card>
         <CardContent>
-          <h1>Bro1</h1>
+          <h1>Grandson</h1>
           <p>Count: {count}</p>
           <Button onClick={() => setCount(0)}>Reset</Button>
           <Button onClick={() => setCount(count - 1)}>-</Button>
           <Button onClick={() => setCount(count + 1)}>+</Button>
         </CardContent>
       </Card>
-      <Grandson count={count} setCount={onCount} />
     </>
   );
 };

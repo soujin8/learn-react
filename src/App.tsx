@@ -5,8 +5,8 @@ import React from "react";
 // import Callback from "./components/CallbackSample/Callback";
 // import Ref from "./components/RefSample/Ref";
 // import DataFetch from "./components/DataFetch/DataFetch";
-import Chart from "./components/Chart/Chart";
-// import Parent from "./components/LoopSample/Parent";
+// import Chart from "./components/Chart/Chart";
+import Parent from "./components/LoopSample/Parent";
 
 const App: React.FC = () => {
   return (
@@ -17,8 +17,8 @@ const App: React.FC = () => {
       {/* <Callback /> */}
       {/* <Ref /> */}
       {/*<DataFetch /> */}
-      <Chart />
-      {/* <Parent /> */}
+      {/* <Chart /> */}
+      <Parent />
     </>
   );
 };

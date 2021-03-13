@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Children from "./Children";
+import Brother from "./Brother";
 
 const Parent: React.FC = () => {
   const [count, setCount] = useState(0);
@@ -8,8 +9,8 @@ const Parent: React.FC = () => {
   };
   return (
     <>
-      <button onClick={() => onCount(count + 0)}>Reset</button>
       <Children count={count} setCount={onCount} />
+      <Brother count={count} setCount={onCount} />
     </>
   );
 };
